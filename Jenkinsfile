@@ -10,12 +10,6 @@ pipeline {
 
   stages {
 
-    stage('Checkout') {
-      steps {
-        git url: '<your-repo-url>', branch: 'main'
-      }
-    }
-
     stage('Build Docker Image') {
       steps {
         sh 'docker build -t $IMAGE_NAME:latest .'
@@ -32,11 +26,11 @@ pipeline {
       }
     }
 
-    stage('Terraform Apply') {
+    stage('Terraform Init & Apply') {
       steps {
         dir('terraform') {
-          sh 'terraform init'
-          sh 'terraform apply -auto-approve'
+          sh 'terraform init -input=false'
+          sh 'terraform apply -auto-approve -input=false'
         }
       }
     }
