@@ -57,6 +57,16 @@ module "eks" {
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.public_subnets
 
+  manage_aws_auth_configgmap = true
+
+  aws_auth_users = [
+    {
+      userarn  = "arn:aws:iam::258215414348:user/Jenkins-user"
+      username = "jenkins"
+      groups   = ["system:masters"]
+    }
+  ]
+
   eks_managed_node_groups = {
     default = {
       instance_types = ["t3.medium"]
