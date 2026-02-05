@@ -29,8 +29,11 @@ pipeline {
     stage('Terraform Init & Apply') {
       steps {
         dir('terraform') {
-          sh 'terraform init -input=false'
-          sh 'terraform apply -auto-approve -input=false'
+          sh '''
+      rm -rf .terraform .terraform.lock.hcl
+      terraform init -input=false
+      terraform apply -auto-approve -input=false
+          '''
         }
       }
     }
