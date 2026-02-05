@@ -1,5 +1,5 @@
 ############################################
-# Terraform & Provider Versions (IMPORTANT)
+# Terraform & Provider (SAFE VERSIONS)
 ############################################
 
 terraform {
@@ -40,15 +40,15 @@ module "vpc" {
 }
 
 ############################################
-# EKS
+# EKS (STABLE v19 SYNTAX)
 ############################################
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 20.0"
+  version = "~> 19.0"
 
-  name               = "trend-eks"
-  kubernetes_version = "1.29"
+  cluster_name    = "trend-eks"
+  cluster_version = "1.29"
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.public_subnets
