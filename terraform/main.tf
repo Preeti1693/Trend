@@ -13,6 +13,8 @@ module "vpc" {
 
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"
+  version         = "~>19.0"
+
   cluster_name    = "trend-eks"
   cluster_version = "1.29"
   subnet_ids      = module.vpc.public_subnets
